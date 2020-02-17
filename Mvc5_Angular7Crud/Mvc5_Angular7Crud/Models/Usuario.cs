@@ -2,7 +2,7 @@
 
 namespace Mvc5_Angular7Crud.Models
 {
-    [Table("Usuario")]
+    [Table("Usuario ")]
     public class Usuario
     {
         public int Id { get; set; }
