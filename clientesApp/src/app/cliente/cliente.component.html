@@ -1,0 +1,121 @@
+<div class="container">  
+      
+  <mat-card>  
+    <mat-toolbar style="background-color: black;" >  
+      <div align="center" style="color:white;text-align: right;">  
+      Cadastre-se !! CadUsuario
+      </div>    
+    </mat-toolbar>  
+  <br><br>  
+    <mat-card-content>  
+      <form [formGroup]="clienteForm"(ngSubmit)="onFormSubmit(clienteForm.value)">  
+              <table>  
+                <tr>  
+                  <td class="tbl1">  
+                    <mat-form-field class="demo-full-width">  
+                      <input formControlName="NomeCompleto" matTooltip="Informe o Nome" matInput placeholder="Nome" class="form-control" >   
+                    </mat-form-field>  
+                    <mat-error>  
+                      <span *ngIf="!clienteForm.get('NomeCompleto').value && clienteForm.get('NomeCompleto').touched"></span>  
+                    </mat-error>  
+                  </td>  
+                  <td class="tbl1">  
+                    <mat-form-field class="demo-full-width">  
+                      <input  type="email" formControlName="Email" matTooltip="Entre com o Email" matInput placeholder="Email" class="form-control" >  
+                    </mat-form-field>  
+                    <mat-error>  
+                      <span *ngIf="!clienteForm.get('Email').value && clienteForm.get('Email').touched"></span>  
+                    </mat-error>  
+                  </td>  
+                </tr>  
+                <tr>  
+                  <td class="tbl1">  
+                      <mat-form-field class="demo-full-width">  
+                     <input formControlName="Login" matTooltip="Informe o Login" matInput placeholder="Login" class="form-control" >  
+                    </mat-form-field>  
+                    <br><br>  
+                    <mat-error>  
+                      <span *ngIf="!clienteForm.get('Login').value && clienteForm.get('Login').touched"></span>  
+                    </mat-error>  
+                  </td>  
+                  <td class="tbl1">  
+                    <mat-form-field class="demo-full-width">  
+                      <input type="password" matTooltip="Informe Senha"formControlName="Senha" matInput placeholder="Senha" class="form-control" >  
+                    </mat-form-field>  
+                    <mat-error>  
+                      <span *ngIf="!clienteForm.get('Senha').value && clienteForm.get('Senha').touched"></span>  
+                    </mat-error>  
+                  </td>  
+                  <td class="tbl1">  
+                    <mat-form-field class="demo-full-width">  
+                      <input formControlName="DataNascimento" matTooltip="Informe a Data de nascimento" matInput placeholder="Data de nascimento" class="form-control"  id="calendario" type="text"  >  
+                    </mat-form-field>  
+                    <mat-error>  
+                      <span *ngIf="!clienteForm.get('DataNascimento').value && clienteForm.get('DataNascimento').touched"></span>  
+                    </mat-error>  
+                  </td>  
+                </tr>  
+                <tr>  
+                  <td></td>  
+                  <td  class="content-center">  
+                    <button type="submit" mat-raised-button color="accent"matTooltip="Clique em Submeter para enviar"[disabled]="!clienteForm.valid">Cadastrar</button>      
+                    <button type="reset" mat-raised-button color="black" style="background-color: black; color: white;" matTooltip="Clique em Resetar para limpar" (click)="resetForm()">Limpar</button>  
+                  </td>  
+                  <td>  
+                    <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success" align="left">  
+                      {{massage}}  
+                    </p>  
+                  </td>  
+                </tr>  
+              </table>  
+  <br><br>  
+        <table class="table" >  
+            <tr  ngclass="btn-primary">  
+              <th class="tbl2">Id</th>  
+              <th class="tbl2">Nome</th>  
+              <th class="tbl2">Email</th>  
+              <th class="tbl2">Login</th>  
+              <th class="tbl2">Senha</th>  
+              <th class="tbl2">Data Nascimento</th>  
+              <th class="tbl2"></th>  
+              <th class="tbl2"></th>  
+            </tr>  
+            <tr *ngFor="let cliente of allClientes | async">  
+              <td scope="row" class="tbl2">{{cliente.Id}}</td>
+              <td class="tbl2">{{cliente.NomeCompleto}}</td>  
+              <td class="tbl2">{{cliente.Email}}</td>  
+              <td class="tbl2">{{cliente.Login}}</td>  
+              <td class="tbl2">{{cliente.Senha}}</td>  
+              <td class="tbl2">{{cliente.DataNascimento}}</td>  
+              <td class="tbl2">  
+                <button type="button" class="btn btn-info"matTooltip="Clique para Editar"(click)="loadClienteToEdit(cliente.Id)">Editar</button>  
+              </td>  
+              <td class="tbl2">  
+                <button type="button" class="btn btn-danger"matTooltip="Clique para Deletar"(click)="deleteCliente(cliente.Id)">Deletar</button>  
+              </td>  
+            </tr>  
+    
+          </table>  
+      </form>  
+    </mat-card-content>  
+  </mat-card>  
+  </div>  
+
+ 
+
+  <script  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"  crossorigin="anonymous"></script>
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"  integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"  crossorigin="anonymous"></script>
+  <script  src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"  integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"  crossorigin="anonymous"></script>
+  <link  rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"  crossorigin="anonymous">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+
+<script>
+  $(function() {
+      $( "#calendario" ).datepicker();
+      showButtonPanel:true;
+      alert("TESTE");
+
+  });
+  </script>
